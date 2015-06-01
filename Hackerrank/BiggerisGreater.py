@@ -66,5 +66,3 @@ for word in words:
         
     print ''.join(num_word)
     #print
-
-        
