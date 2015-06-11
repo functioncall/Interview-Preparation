@@ -42,7 +42,8 @@ for word in words:
             break
         i=i-1
         j=i-1
-        if j == 0:
+        set_flag = 1
+        if new_num_word[i] > new_num_word[j] and (i+1) < len(new_num_word):
             temp = new_num_word[j]
             for n,i in enumerate(new_num_word):
                 if i == (temp+1):
@@ -51,18 +52,23 @@ for word in words:
             new_num_word[i:len(new_num_word)] = sorted(new_num_word[i:len(new_num_word)])
             #print i,j,new_num_word,new_num_word[i], new_num_word[j],temp
             break
-            
         #print i,j,new_num_word,new_num_word[i], new_num_word[j],new_num_word[j:i+1]
-        if new_num_word[i] > new_num_word[j]:
-            #print 'here'
+        elif new_num_word[i] > new_num_word[j] and (i+1) == len(new_num_word):
             new_num_word[j:i+1] = new_num_word[j:i+1][::-1]
             break
+        elif new_num_word[i] < new_num_word[j] and j == 0:
+            print 'no answer'
+            set_flag = 0
+            break
+        else:
+            continue
     #print new_num_word
     
     #Convert it into characters
     num_word = []
-    for item in new_num_word:
-        num_word.append(mydict_vk[num_map_rev[item]])
+    if set_flag:
+        for item in new_num_word:
+            num_word.append(mydict_vk[num_map_rev[item]])
+        print ''.join(num_word)
+
         
-    print ''.join(num_word)
-    #print

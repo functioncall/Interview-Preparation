@@ -16,6 +16,8 @@ ar = [int(i) for i in raw_input().strip().split()]
 insertionSort(ar)
 
 """
+t=int(raw_input())
+
 def insertion_sort(l):
 	for i in xrange(1, len(l)):
 		j = i-1 
@@ -25,7 +27,16 @@ def insertion_sort(l):
 			j -= 1
 		l[j+1] = key
 	return l
-m = input()
-ar = [int(i) for i in raw_input().strip().split()]
-insertion_sort(ar)
-print " ".join(map(str,ar))
+out = []
+while t:
+	m = input()
+	ar = [int(i) for i in raw_input().strip().split()]
+	insertion_sort(ar)
+	out.append(ar)
+	t=t-1
+
+for item in out:
+	print item
+	# print " ".join(map(str,item[::-1]))
+
+# print " ".join(map(str,ar[::-1]))
