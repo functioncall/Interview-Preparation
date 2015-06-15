@@ -4,16 +4,16 @@ This is a docstring for the module:
 This module demonstrates the merge functionality
 in the 2048 game.
 """
-def check_merge(j):
+def check_merge(iterator):
     """
     Check whether the merge has happen at a particular
     index or not, and returns the appropriate boolean value
     for the same.
     """
-    if merge_check_dict[j] == 0:
-        merge_check_dict[j] = 1
-        for item in xrange(j+1):
-            merge_check_dict[item] = 1
+    if Dictionary[iterator] == 0:
+        Dictionary[iterator] = 1
+        for item in xrange(iterator+1):
+            Dictionary[item] = 1
         return 1
     else:
         return 0
@@ -25,7 +25,7 @@ def merge(line):
     result = [0]*len(line)
     # Initialize the dictionary with default value 0
     for index in xrange(len(line)):
-        merge_check_dict[index] = 0
+        Dictionary[index] = 0
     
     # Iterate over every value in the list
     for index,item in enumerate(line):
@@ -37,28 +37,28 @@ def merge(line):
                 # For the rest of the elements, iterate towards the front of the list and start merging
             else:
                 set_flag = 0
-                for j in xrange(index,0,-1):
+                for iterator in xrange(index,0,-1):
                	    # For 0 elements
-                    if result[j-1] == 0:
-                        result[j-1] = item
-                        result[j] = 0
+                    if result[iterator-1] == 0:
+                        result[iterator-1] = item
+                        result[iterator] = 0
                         set_flag=1
                     # For elements which are same and merge can be applied
-                    elif result[j-1] == item and check_merge(j-1):
-                        result[j-1] = item + item
-                        result[j] = 0
+                    elif result[iterator-1] == item and check_merge(iterator-1):
+                        result[iterator-1] = item + item
+                        result[iterator] = 0
                         break
-                    elif result[j-1] != item and set_flag == 1:
+                    elif result[iterator-1] != item and set_flag == 1:
                         break
-                    elif result[j-1] != item and set_flag == 0:
+                    elif result[iterator-1] != item and set_flag == 0:
                         result[index] = item
                         break
 
     return result
 
-# lst1 = map(int,raw_input().split())
-lst1 = [8,8]
+list_1 = map(int,raw_input().split())
+# list_1 = [8,8]
 # Initialize an empty dictionary
-merge_check_dict = {}
+Dictionary = {}
 # Printing the result
-print merge(lst1)
+print merge(list_1)
